@@ -1,8 +1,9 @@
 
-FROM nginx
-RUN rm -rf /usr/share/nginx/html/index.html
+# Remove default files
+RUN rm -rf /usr/share/nginx/html/*
 RUN rm -rf /etc/nginx/nginx.conf
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY code /usr/share/nginx/html
 
+# Copy custom config and website code
+COPY code/nginx.conf /etc/nginx/nginx.conf
+COPY code/ /usr/share/nginx/html/
 
