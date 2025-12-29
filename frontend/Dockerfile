@@ -8,7 +8,7 @@ RUN rm -rf /etc/nginx/nginx.conf
 
 # Copy custom config and website code
 COPY code/nginx.conf /etc/nginx/nginx.conf
-COPY code/ /usr/share/nginx/html/
+COPY code /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
