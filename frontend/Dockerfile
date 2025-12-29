@@ -13,7 +13,7 @@ COPY code/ /usr/share/nginx/html/
 # Expose port 80
 EXPOSE 80
 
-# Start Nginx
+# Start Nginx fffff
 CMD ["nginx", "-g", "daemon off;"]
 #iiiiiii
 
