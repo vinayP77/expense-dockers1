@@ -14,7 +14,7 @@ mysql:
  container_name: mysql
  volumes:
  - mysql:/var/lib/mysql
- # mysql data store chesikone directory
+ # mysql data store chesikone directory in video
 
 #docker  run -d --name backend --network expense -v   backend:1.0.0
 
