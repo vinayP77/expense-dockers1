@@ -1,0 +1,41 @@
+networks:
+ # the presence of these objects is sufficient to define them
+ expense: {}
+volumes:
+ mysql:
+services:
+
+#docker run -d --name mysql --network expense -v mysql:var/lib/mysql mysql:1.0.0
+mysql:
+ image: mysql:1.0.0
+ command: sh -c"sleep 5 && node /opt/backend/index.js"
+ network:
+ - expense
+ container_name: mysql
+ volumes:
+ - mysql:/var/lib/mysql
+ # mysql data store chesikone directory
+
+#docker  run -d --name backend --network expense -v   backend:1.0.0
+
+backend:
+ image: backend:1.0.0
+ command: sh -c "sleep 5 && node /opt/backend/index.js"
+ network:
+ - expense
+ conatiner_name: backend
+ depends-on:
+ - mysql
+
+ #docker run -d --name frontend --network expense -v frontend:1.0.0
+
+ frontend:
+  image: frontend:1.0.0
+  network:
+  - expense
+  container_name: frontend
+  ports:
+  - 80:80
+  depends_on:
+  - backend
+
