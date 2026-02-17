@@ -1,1 +1,120 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Expense App"/><title>React App</title><script defer="defer" src="./static/js/main.bcd36112.js"></script><link href="./static/css/main.b20b6ac4.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+====================================
+i need this output
+
+NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+nvme0n1                202:0    0   50G  0 disk
+├─nvmeon1p1              202:1    0    1M  0 part
+├─nvmeon1p2        202:2    0  122M  0 part /boot/efi
+├─nvmeon1p3               202:3    0  488M  0 part /boot
+└─nvmeon1p4              202:4    0 19.4G  0 part
+  ├─RootVG-rootVol   253:0    0    6G  0 lvm  /
+  ├─RootVG-swapVol   253:1    0    2G  0 lvm  [SWAP]
+  ├─RootVG-homeVol   253:2    0    1G  0 lvm  /home
+  ├─RootVG-varVol    253:3    0    2G  0 lvm  /var
+  ├─RootVG-varTmpVol 253:4    0    2G  0 lvm  /var/tmp
+  ├─RootVG-logVol    253:5    0    2G  0 lvm  /var/log
+  └─RootVG-auditVol  253:6    0  4.4G  0 lvm  /var/log/audit
+
+ but we got this output
+
+NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+xvda                 202:0    0   50G  0 disk
+├─xvda1              202:1    0    1M  0 part
+├─xvda2              202:2    0  122M  0 part /boot/efi
+├─xvda3              202:3    0  488M  0 part /boot
+└─xvda4              202:4    0 19.4G  0 part
+  ├─RootVG-rootVol   253:0    0    6G  0 lvm  /
+  ├─RootVG-swapVol   253:1    0    2G  0 lvm  [SWAP]
+  ├─RootVG-homeVol   253:2    0    1G  0 lvm  /home
+  ├─RootVG-varVol    253:3    0    2G  0 lvm  /var
+  ├─RootVG-varTmpVol 253:4    0    2G  0 lvm  /var/tmp
+  ├─RootVG-logVol    253:5    0    2G  0 lvm  /var/log
+  └─RootVG-auditVol  253:6    0  4.4G  0 lvm  /var/log/audit
+=================================================================================================
+
+networks:
+  expense: {}
+  # docker volume create mysql
+volumes:
+  mysql:
+services:
+  backend:
+    image: joindevops/backend:1.0.0
+    command: sh -c "sleep 10 && node /opt/backend/index.js"
+    networks:
+    - expense
+    container_name: backend
+    depends_on:
+    - mysql
+
+  # docker run -d --name mysql --network expense -v mysql:/var/lib/mysql mysql:1.0.0
+  mysql:
+    image: joindevops/mysql:1.0.0
+    networks:
+    - expense
+    container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql
+
+  frontend:
+    image: joindevops/frontend:1.0.0
+    networks:
+    - expense
+    container_name: frontend
+    ports:
+    - 80:80
+    depends_on:
+    - backend
+  
+  ========================================================= by own code===========================
+
+networks:
+ # the presence of these objects is sufficient to define them
+ expense: {}
+volumes:
+ mysql:
+services:
+
+#docker run -d --name mysql --network expense -v mysql:var/lib/mysql mysql:1.0.0
+mysql:
+ image: mysql:1.0.0
+ command: sh -c"sleep 5 && node /opt/backend/index.js"
+ network:
+ - expense
+ container_name: mysql
+ volumes:
+ - mysql:/var/lib/mysql
+ # mysql data store chesikone directory in video
+
+#docker  run -d --name backend --network expense -v   backend:1.0.0
+
+backend:
+ image: backend:1.0.0
+ command: sh -c "sleep 5 && node /opt/backend/index.js"
+ network:
+ - expense
+ conatiner_name: backend
+ depends-on:
+ - mysql
+
+ #docker run -d --name frontend --network expense -v frontend:1.0.0
+
+ frontend:
+  image: frontend:1.0.0
+  network:
+  - expense
+  container_name: frontend
+  ports:
+  - 80:80
+  depends_on:
+  - backend
+
+
+=========================================================
+export DOCKER_BUILDKIT=0
+docker login -u vinayp77
+====================================
+
+
+i need to prepare kubernetes 13 videos each video 1 hour 30 min.. i am doing job.. rotating shifts .. i need study plain .... my shifts is morning and afternoon and night morning time: 6:30 to 2:30 afternoon time 2:30 to 10:30 night time 10:30 to 6:30 every day 8 hours work january 27th Day:Afternoon shift 28th day :Night 29th day :Night 30th day:Night 31th day: Holiday February 1st day:Morning shift 2nd day:Afternoon shift 3rd day:Afternoon shift 4th day: Morning shift 5th day: Morning shift 6th day holiday 7th day holiday 8th day Morning shift 9th day Morning shift 10th day Morning Shift i need to study plain please make it cclear and simple.
